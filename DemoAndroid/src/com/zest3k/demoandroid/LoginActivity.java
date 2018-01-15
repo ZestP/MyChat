@@ -23,7 +23,7 @@ public class LoginActivity extends Activity {
 				Intent myIntent=new Intent();
 				myIntent.setClass(LoginActivity.this, MainActivity.class);
 				myIntent.putExtra("zest3k","Abc");
-				//myIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+				myIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 				LoginActivity.this.startActivity(myIntent);
 			}
 			
