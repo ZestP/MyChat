@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:id="@+id/login_root">
 
     <ImageView
         android:layout_width="match_parent"
@@ -30,18 +31,24 @@
             android:layout_height="wrap_content"
             android:hint="User Name..."
             android:textAlignment="center"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:textSize="20sp" 
+            android:background="@drawable/shape_edittext"
+            android:layout_margin="5dp"
+            android:singleLine="true"
             />"
-
+		
         <EditText
             android:id="@+id/passcode"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="Password..."
             android:textAlignment="center"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:textSize="20sp"
+            android:background="@drawable/shape_edittext"
+            android:layout_margin="5dp"
+            android:singleLine="true"
             />
         <Button
             android:id="@+id/loginbtn"
@@ -51,6 +58,8 @@
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="20sp"  
+            android:layout_margin="5dp"
+            android:background="@drawable/shape_btn"
             />
     </LinearLayout>
 
