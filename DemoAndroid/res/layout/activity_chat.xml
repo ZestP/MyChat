@@ -1,0 +1,187 @@
+<RelativeLayout xmlns:ios="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    ios:layout_width="match_parent"
+    ios:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <RelativeLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="wrap_content"
+        ios:background="#000000" 
+        ios:id="@+id/topbar">
+
+        <TextView
+            ios:id="@+id/chattitle"
+            ios:layout_width="wrap_content"
+            ios:layout_height="wrap_content"
+            ios:layout_gravity="center_horizontal"
+            ios:layout_margin="10dp"
+            ios:text="Eric"
+            ios:textColor="#ffffff"
+            ios:textSize="20sp" />
+    </RelativeLayout>
+
+    
+
+    <RelativeLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="wrap_content"
+        ios:layout_alignParentBottom="true"
+        ios:background="#000000" 
+        ios:id="@+id/bottombar">
+
+        <TextView
+            ios:id="@+id/morefun"
+            ios:layout_width="wrap_content"
+            ios:layout_height="wrap_content"
+            ios:layout_alignParentLeft="true"
+            ios:layout_centerVertical="true"
+            ios:layout_margin="10dp"
+            ios:gravity="center"
+            ios:text="+"
+            ios:textColor="#ffffff"
+            ios:textSize="20sp" />
+
+        <TextView
+            ios:id="@+id/send"
+            ios:layout_width="wrap_content"
+            ios:layout_height="wrap_content"
+            ios:layout_alignParentRight="true"
+            ios:layout_centerVertical="true"
+            ios:layout_margin="10dp"
+            ios:gravity="center"
+            ios:text="Send"
+            ios:textColor="#ffffff"
+            ios:textSize="20sp" />
+
+        <EditText
+            ios:id="@+id/sendingtext"
+            ios:layout_width="match_parent"
+            ios:layout_height="wrap_content"
+            ios:layout_centerVertical="true"
+            ios:layout_marginBottom="10dp"
+            ios:layout_marginTop="10dp"
+            ios:layout_toLeftOf="@id/send"
+            ios:layout_toRightOf="@id/morefun"
+            ios:hint="Texting here..."
+            ios:textColor="#000000"
+            ios:textSize="20sp" />
+    </RelativeLayout>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+	<LinearLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="match_parent"
+        ios:background="#EEEEEE"
+        ios:orientation="horizontal"
+        ios:layout_above="@id/bottombar"
+        ios:layout_below="@id/topbar" >
+
+        <RelativeLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="wrap_content"
+        ios:orientation="horizontal" 
+        >
+		<FrameLayout 
+		    ios:layout_width="wrap_content"
+        	ios:layout_height="wrap_content"
+        	ios:layout_centerVertical="true"
+        	ios:id="@+id/iconFrameChat">
+		    <TextView
+	            ios:layout_width="40dp"
+	            ios:layout_height="40dp"
+	            ios:layout_gravity="center"
+	            ios:layout_margin="10dp"
+	            ios:background="#66ccff" />
+
+			<TextView
+			    ios:layout_width="wrap_content"
+			    ios:layout_height="wrap_content"
+			    ios:layout_gravity="top|right"
+			    ios:layout_margin="5dp"
+			    ios:background="@drawable/bshape"
+			    ios:text="111"
+			    ios:textAlignment="center"
+			    ios:textColor="#ffffff"
+			    ios:textSize="15sp"
+			    ios:visibility="visible" />
+
+		</FrameLayout>
+        
+        <LinearLayout
+            ios:layout_width="match_parent"
+            ios:layout_height="wrap_content"
+            ios:orientation="vertical" 
+            ios:layout_toRightOf="@id/iconFrameChat">
+
+            <RelativeLayout
+                ios:layout_width="match_parent"
+                ios:layout_height="wrap_content" >
+
+                <TextView
+                    ios:layout_width="match_parent"
+                    ios:layout_height="wrap_content"
+                    ios:ellipsize="marquee"
+                    ios:gravity="left"
+                    ios:marqueeRepeatLimit="marquee_forever"
+                    ios:paddingBottom="5dp"
+                    ios:paddingTop="10dp"
+                    ios:password="false"
+                    ios:singleLine="true"
+                    ios:text="Eric Dong"
+                    ios:textColor="#000000" 
+                    ios:textSize="15sp"/>
+
+                <TextView
+                    ios:layout_width="match_parent"
+                    ios:layout_height="wrap_content"
+                    ios:ellipsize="marquee"
+                    ios:gravity="right"
+                    ios:marqueeRepeatLimit="marquee_forever"
+                    ios:paddingBottom="5dp"
+                    ios:paddingRight="10dp"
+                    ios:paddingTop="10dp"
+                    ios:password="false"
+                    ios:singleLine="true"
+                    ios:text="11:00"
+                    ios:textColor="@android:color/darker_gray" 
+                    ios:textSize="12sp"/>
+            </RelativeLayout>
+
+            <TextView
+                ios:layout_width="match_parent"
+                ios:layout_height="wrap_content"
+                ios:paddingBottom="10dp"
+                ios:paddingTop="5dp"
+                ios:text="My name is Zest3k."
+                ios:textColor="@android:color/darker_gray"
+                ios:textSize="12sp" />
+        </LinearLayout>
+    </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,730 @@
+<LinearLayout xmlns:ios="http://schemas.android.com/apk/res/android"
+    ios:id="@+id/rootLayout"
+    ios:layout_width="match_parent"
+    ios:layout_height="match_parent"
+    ios:orientation="vertical" 
+    ios:background="#ffffff">
+	<RelativeLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="wrap_content"
+        ios:background="#000000">
+        <TextView
+            ios:id="@+id/title"
+            ios:layout_width="wrap_content"
+            ios:layout_height="wrap_content"
+            ios:layout_gravity="center_horizontal"
+			ios:layout_margin="10dp"
+			ios:text="MyChat"
+			ios:textColor="#ffffff"
+			ios:textSize="20sp"/>
+    </RelativeLayout>
+    <ScrollView 
+        ios:layout_width="match_parent"
+        ios:layout_height="match_parent">
+    <LinearLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="wrap_content"
+        ios:orientation="vertical" >
+    <LinearLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="wrap_content"
+        ios:orientation="horizontal" >
+
+        <TextView
+            ios:id="@+id/icon"
+            ios:layout_width="40dp"
+            ios:layout_height="40dp"
+            ios:layout_gravity="center"
+			ios:layout_margin="10dp"
+            ios:background="#66ccff" />
+        <TextView
+            ios:layout_width="10dp"
+            ios:layout_height="10dp"
+            ios:layout_marginLeft="-15dp"
+            ios:layout_marginBottom="20dp"
+            ios:layout_gravity="center"
+            ios:background="@drawable/bshape" />
+        <LinearLayout
+            ios:layout_width="match_parent"
+            ios:layout_height="wrap_content"
+            ios:orientation="vertical" >
+
+            <RelativeLayout
+                ios:layout_width="match_parent"
+                ios:layout_height="wrap_content" >
+
+                <TextView
+                    ios:id="@+id/text1"
+                    ios:layout_width="match_parent"
+                    ios:layout_height="wrap_content"
+                    ios:ellipsize="marquee"
+                    ios:gravity="left"
+                    ios:marqueeRepeatLimit="marquee_forever"
+                    ios:paddingBottom="5dp"
+                    ios:paddingTop="10dp"
+                    ios:password="false"
+                    ios:singleLine="true"
+                    ios:text="@string/hello_world"
+                    ios:textSize="15sp"
+                    ios:textColor="#000000" />
+
+                <TextView
+                    ios:layout_width="match_parent"
+                    ios:layout_height="wrap_content"
+                    ios:ellipsize="marquee"
+                    ios:gravity="right"
+                    ios:marqueeRepeatLimit="marquee_forever"
+                    ios:paddingBottom="5dp"
+                    ios:paddingRight="10dp"
+                    ios:paddingTop="10dp"
+                    ios:password="false"
+                    ios:singleLine="true"
+                    ios:text="11:00"
+                    ios:textSize="12sp"
+                    ios:textColor="@android:color/darker_gray" />
+            </RelativeLayout>
+
+            <TextView
+                ios:layout_width="match_parent"
+                ios:layout_height="wrap_content"
+                ios:paddingBottom="10dp"
+                ios:paddingTop="5dp"
+                ios:text="My name is Zest3k."
+                ios:textSize="12sp"
+                ios:textColor="@android:color/darker_gray" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="1dp"
+        ios:background="#EEEEEE"
+        ios:orientation="horizontal" >
+    </LinearLayout>
+	
+    <LinearLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="wrap_content"
+        ios:orientation="horizontal" >
+
+        <TextView
+            ios:layout_width="40dp"
+            ios:layout_height="40dp"
+            ios:layout_gravity="center"
+            ios:layout_margin="10dp"
+            ios:background="@drawable/ic_launcher" />
+        <TextView
+            ios:layout_width="10dp"
+            ios:layout_height="10dp"
+            ios:layout_marginLeft="-15dp"
+            ios:layout_marginBottom="20dp"
+            ios:layout_gravity="center"
+            ios:background="@drawable/bshape" />
+
+        <LinearLayout
+            ios:layout_width="match_parent"
+            ios:layout_height="wrap_content"
+            ios:orientation="vertical" >
+
+            <RelativeLayout
+                ios:layout_width="match_parent"
+                ios:layout_height="wrap_content" >
+
+                <TextView
+                    ios:layout_width="match_parent"
+                    ios:layout_height="wrap_content"
+                    ios:ellipsize="marquee"
+                    ios:gravity="left"
+                    ios:marqueeRepeatLimit="marquee_forever"
+                    ios:paddingBottom="5dp"
+                    ios:paddingTop="10dp"
+                    ios:password="false"
+                    ios:singleLine="true"
+                    ios:text="Jianli Lee"
+                    ios:textColor="#000000" 
+                    ios:textSize="15sp"/>
+
+                <TextView
+                    ios:layout_width="match_parent"
+                    ios:layout_height="wrap_content"
+                    ios:ellipsize="marquee"
+                    ios:gravity="right"
+                    ios:marqueeRepeatLimit="marquee_forever"
+                    ios:paddingBottom="5dp"
+                    ios:paddingRight="10dp"
+                    ios:paddingTop="10dp"
+                    ios:password="false"
+                    ios:singleLine="true"
+                    ios:text="11:00"
+                    ios:textColor="@android:color/darker_gray"
+                    ios:textSize="12sp" />
+            </RelativeLayout>
+
+            <TextView
+                ios:layout_width="match_parent"
+                ios:layout_height="wrap_content"
+                ios:paddingBottom="10dp"
+                ios:paddingTop="5dp"
+                ios:text="My name is Zest3k."
+                ios:textSize="12sp"
+                ios:textColor="@android:color/darker_gray" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="1dp"
+        ios:background="#EEEEEE"
+        ios:orientation="horizontal" >
+    </LinearLayout>
+
+    <RelativeLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="wrap_content"
+        ios:orientation="horizontal" 
+        ios:id="@+id/ericcard">
+		<FrameLayout 
+		    ios:layout_width="wrap_content"
+        	ios:layout_height="wrap_content"
+        	ios:layout_centerVertical="true"
+        	ios:id="@+id/iconFrame">
+		    <TextView
+	            ios:layout_width="40dp"
+	            ios:layout_height="40dp"
+	            ios:layout_gravity="center"
+	            ios:layout_margin="10dp"
+	            ios:background="#66ccff" />
+
+			<TextView
+			    ios:layout_width="wrap_content"
+			    ios:layout_height="wrap_content"
+			    ios:layout_gravity="top|right"
+			    ios:layout_margin="5dp"
+			    ios:background="@drawable/bshape"
+			    ios:text="111"
+			    ios:textAlignment="center"
+			    ios:textColor="#ffffff"
+			    ios:textSize="15sp"
+			    ios:visibility="visible" />
+
+		</FrameLayout>
+        
+        <LinearLayout
+            ios:layout_width="match_parent"
+            ios:layout_height="wrap_content"
+            ios:orientation="vertical" 
+            ios:layout_toRightOf="@id/iconFrame">
+
+            <RelativeLayout
+                ios:layout_width="match_parent"
+                ios:layout_height="wrap_content" >
+
+                <TextView
+                    ios:layout_width="match_parent"
+                    ios:layout_height="wrap_content"
+                    ios:ellipsize="marquee"
+                    ios:gravity="left"
+                    ios:marqueeRepeatLimit="marquee_forever"
+                    ios:paddingBottom="5dp"
+                    ios:paddingTop="10dp"
+                    ios:password="false"
+                    ios:singleLine="true"
+                    ios:text="Eric Dong"
+                    ios:textColor="#000000" 
+                    ios:textSize="15sp"/>
+
+                <TextView
+                    ios:layout_width="match_parent"
+                    ios:layout_height="wrap_content"
+                    ios:ellipsize="marquee"
+                    ios:gravity="right"
+                    ios:marqueeRepeatLimit="marquee_forever"
+                    ios:paddingBottom="5dp"
+                    ios:paddingRight="10dp"
+                    ios:paddingTop="10dp"
+                    ios:password="false"
+                    ios:singleLine="true"
+                    ios:text="11:00"
+                    ios:textColor="@android:color/darker_gray" 
+                    ios:textSize="12sp"/>
+            </RelativeLayout>
+
+            <TextView
+                ios:layout_width="match_parent"
+                ios:layout_height="wrap_content"
+                ios:paddingBottom="10dp"
+                ios:paddingTop="5dp"
+                ios:text="My name is Zest3k."
+                ios:id="@+id/ericswords"
+                ios:textColor="@android:color/darker_gray"
+                ios:textSize="12sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="1dp"
+        ios:background="#EEEEEE"
+        ios:orientation="horizontal" >
+    </LinearLayout>
+    
+    <RelativeLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="wrap_content"
+        ios:orientation="horizontal" 
+        ios:id="@+id/ericcard2">
+		<FrameLayout 
+		    ios:layout_width="wrap_content"
+        	ios:layout_height="wrap_content"
+        	ios:layout_centerVertical="true"
+        	ios:id="@+id/iconFrame2">
+		    <TextView
+	            ios:layout_width="40dp"
+	            ios:layout_height="40dp"
+	            ios:layout_gravity="center"
+	            ios:layout_margin="10dp"
+	            ios:background="#66ccff" />
+
+			<TextView
+			    ios:layout_width="wrap_content"
+			    ios:layout_height="wrap_content"
+			    ios:layout_gravity="top|right"
+			    ios:layout_margin="5dp"
+			    ios:background="@drawable/bshape"
+			    ios:text="111"
+			    ios:textAlignment="center"
+			    ios:textColor="#ffffff"
+			    ios:textSize="15sp"
+			    ios:visibility="visible" />
+
+		</FrameLayout>
+        
+        <LinearLayout
+            ios:layout_width="match_parent"
+            ios:layout_height="wrap_content"
+            ios:orientation="vertical" 
+            ios:layout_toRightOf="@id/iconFrame2">
+
+            <RelativeLayout
+                ios:layout_width="match_parent"
+                ios:layout_height="wrap_content" >
+
+                <TextView
+                    ios:layout_width="match_parent"
+                    ios:layout_height="wrap_content"
+                    ios:ellipsize="marquee"
+                    ios:gravity="left"
+                    ios:marqueeRepeatLimit="marquee_forever"
+                    ios:paddingBottom="5dp"
+                    ios:paddingTop="10dp"
+                    ios:password="false"
+                    ios:singleLine="true"
+                    ios:text="Eric Dong"
+                    ios:textColor="#000000" 
+                    ios:textSize="15sp"/>
+
+                <TextView
+                    ios:layout_width="match_parent"
+                    ios:layout_height="wrap_content"
+                    ios:ellipsize="marquee"
+                    ios:gravity="right"
+                    ios:marqueeRepeatLimit="marquee_forever"
+                    ios:paddingBottom="5dp"
+                    ios:paddingRight="10dp"
+                    ios:paddingTop="10dp"
+                    ios:password="false"
+                    ios:singleLine="true"
+                    ios:text="11:00"
+                    ios:textColor="@android:color/darker_gray" 
+                    ios:textSize="12sp"/>
+            </RelativeLayout>
+
+            <TextView
+                ios:layout_width="match_parent"
+                ios:layout_height="wrap_content"
+                ios:paddingBottom="10dp"
+                ios:paddingTop="5dp"
+                ios:text="My name is Zest3k."
+                ios:id="@+id/ericswords2"
+                ios:textColor="@android:color/darker_gray"
+                ios:textSize="12sp" />
+        </LinearLayout>
+    </RelativeLayout>
+    
+    <LinearLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="1dp"
+        ios:background="#EEEEEE"
+        ios:orientation="horizontal" >
+    </LinearLayout>
+    
+    <RelativeLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="wrap_content"
+        ios:orientation="horizontal" 
+        ios:id="@+id/ericcard3">
+		<FrameLayout 
+		    ios:layout_width="wrap_content"
+        	ios:layout_height="wrap_content"
+        	ios:layout_centerVertical="true"
+        	ios:id="@+id/iconFrame3">
+		    <TextView
+	            ios:layout_width="40dp"
+	            ios:layout_height="40dp"
+	            ios:layout_gravity="center"
+	            ios:layout_margin="10dp"
+	            ios:background="#66ccff" />
+
+			<TextView
+			    ios:layout_width="wrap_content"
+			    ios:layout_height="wrap_content"
+			    ios:layout_gravity="top|right"
+			    ios:layout_margin="5dp"
+			    ios:background="@drawable/bshape"
+			    ios:text="111"
+			    ios:textAlignment="center"
+			    ios:textColor="#ffffff"
+			    ios:textSize="15sp"
+			    ios:visibility="visible" />
+
+		</FrameLayout>
+        
+        <LinearLayout
+            ios:layout_width="match_parent"
+            ios:layout_height="wrap_content"
+            ios:orientation="vertical" 
+            ios:layout_toRightOf="@id/iconFrame3">
+
+            <RelativeLayout
+                ios:layout_width="match_parent"
+                ios:layout_height="wrap_content" >
+
+                <TextView
+                    ios:layout_width="match_parent"
+                    ios:layout_height="wrap_content"
+                    ios:ellipsize="marquee"
+                    ios:gravity="left"
+                    ios:marqueeRepeatLimit="marquee_forever"
+                    ios:paddingBottom="5dp"
+                    ios:paddingTop="10dp"
+                    ios:password="false"
+                    ios:singleLine="true"
+                    ios:text="Eric Dong"
+                    ios:textColor="#000000" 
+                    ios:textSize="15sp"/>
+
+                <TextView
+                    ios:layout_width="match_parent"
+                    ios:layout_height="wrap_content"
+                    ios:ellipsize="marquee"
+                    ios:gravity="right"
+                    ios:marqueeRepeatLimit="marquee_forever"
+                    ios:paddingBottom="5dp"
+                    ios:paddingRight="10dp"
+                    ios:paddingTop="10dp"
+                    ios:password="false"
+                    ios:singleLine="true"
+                    ios:text="11:00"
+                    ios:textColor="@android:color/darker_gray" 
+                    ios:textSize="12sp"/>
+            </RelativeLayout>
+
+            <TextView
+                ios:layout_width="match_parent"
+                ios:layout_height="wrap_content"
+                ios:paddingBottom="10dp"
+                ios:paddingTop="5dp"
+                ios:text="My name is Zest3k."
+                ios:id="@+id/ericswords3"
+                ios:textColor="@android:color/darker_gray"
+                ios:textSize="12sp" />
+        </LinearLayout>
+    </RelativeLayout>
+    
+    <LinearLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="1dp"
+        ios:background="#EEEEEE"
+        ios:orientation="horizontal" >
+    </LinearLayout>
+    
+    <RelativeLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="wrap_content"
+        ios:orientation="horizontal" 
+        ios:id="@+id/ericcard4">
+		<FrameLayout 
+		    ios:layout_width="wrap_content"
+        	ios:layout_height="wrap_content"
+        	ios:layout_centerVertical="true"
+        	ios:id="@+id/iconFrame4">
+		    <TextView
+	            ios:layout_width="40dp"
+	            ios:layout_height="40dp"
+	            ios:layout_gravity="center"
+	            ios:layout_margin="10dp"
+	            ios:background="#66ccff" />
+
+			<TextView
+			    ios:layout_width="wrap_content"
+			    ios:layout_height="wrap_content"
+			    ios:layout_gravity="top|right"
+			    ios:layout_margin="5dp"
+			    ios:background="@drawable/bshape"
+			    ios:text="111"
+			    ios:textAlignment="center"
+			    ios:textColor="#ffffff"
+			    ios:textSize="15sp"
+			    ios:visibility="visible" />
+
+		</FrameLayout>
+        
+        <LinearLayout
+            ios:layout_width="match_parent"
+            ios:layout_height="wrap_content"
+            ios:orientation="vertical" 
+            ios:layout_toRightOf="@id/iconFrame4">
+
+            <RelativeLayout
+                ios:layout_width="match_parent"
+                ios:layout_height="wrap_content" >
+
+                <TextView
+                    ios:layout_width="match_parent"
+                    ios:layout_height="wrap_content"
+                    ios:ellipsize="marquee"
+                    ios:gravity="left"
+                    ios:marqueeRepeatLimit="marquee_forever"
+                    ios:paddingBottom="5dp"
+                    ios:paddingTop="10dp"
+                    ios:password="false"
+                    ios:singleLine="true"
+                    ios:text="Eric Dong"
+                    ios:textColor="#000000" 
+                    ios:textSize="15sp"/>
+
+                <TextView
+                    ios:layout_width="match_parent"
+                    ios:layout_height="wrap_content"
+                    ios:ellipsize="marquee"
+                    ios:gravity="right"
+                    ios:marqueeRepeatLimit="marquee_forever"
+                    ios:paddingBottom="5dp"
+                    ios:paddingRight="10dp"
+                    ios:paddingTop="10dp"
+                    ios:password="false"
+                    ios:singleLine="true"
+                    ios:text="11:00"
+                    ios:textColor="@android:color/darker_gray" 
+                    ios:textSize="12sp"/>
+            </RelativeLayout>
+
+            <TextView
+                ios:layout_width="match_parent"
+                ios:layout_height="wrap_content"
+                ios:paddingBottom="10dp"
+                ios:paddingTop="5dp"
+                ios:text="My name is Zest3k."
+                ios:id="@+id/ericswords4"
+                ios:textColor="@android:color/darker_gray"
+                ios:textSize="12sp" />
+        </LinearLayout>
+    </RelativeLayout>
+    
+    <LinearLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="1dp"
+        ios:background="#EEEEEE"
+        ios:orientation="horizontal" >
+    </LinearLayout>
+    
+    <RelativeLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="wrap_content"
+        ios:orientation="horizontal" 
+        ios:id="@+id/ericcard5">
+		<FrameLayout 
+		    ios:layout_width="wrap_content"
+        	ios:layout_height="wrap_content"
+        	ios:layout_centerVertical="true"
+        	ios:id="@+id/iconFrame5">
+		    <TextView
+	            ios:layout_width="40dp"
+	            ios:layout_height="40dp"
+	            ios:layout_gravity="center"
+	            ios:layout_margin="10dp"
+	            ios:background="#66ccff" />
+
+			<TextView
+			    ios:layout_width="wrap_content"
+			    ios:layout_height="wrap_content"
+			    ios:layout_gravity="top|right"
+			    ios:layout_margin="5dp"
+			    ios:background="@drawable/bshape"
+			    ios:text="111"
+			    ios:textAlignment="center"
+			    ios:textColor="#ffffff"
+			    ios:textSize="15sp"
+			    ios:visibility="visible" />
+
+		</FrameLayout>
+        
+        <LinearLayout
+            ios:layout_width="match_parent"
+            ios:layout_height="wrap_content"
+            ios:orientation="vertical" 
+            ios:layout_toRightOf="@id/iconFrame5">
+
+            <RelativeLayout
+                ios:layout_width="match_parent"
+                ios:layout_height="wrap_content" >
+
+                <TextView
+                    ios:layout_width="match_parent"
+                    ios:layout_height="wrap_content"
+                    ios:ellipsize="marquee"
+                    ios:gravity="left"
+                    ios:marqueeRepeatLimit="marquee_forever"
+                    ios:paddingBottom="5dp"
+                    ios:paddingTop="10dp"
+                    ios:password="false"
+                    ios:singleLine="true"
+                    ios:text="Eric Dong"
+                    ios:textColor="#000000" 
+                    ios:textSize="15sp"/>
+
+                <TextView
+                    ios:layout_width="match_parent"
+                    ios:layout_height="wrap_content"
+                    ios:ellipsize="marquee"
+                    ios:gravity="right"
+                    ios:marqueeRepeatLimit="marquee_forever"
+                    ios:paddingBottom="5dp"
+                    ios:paddingRight="10dp"
+                    ios:paddingTop="10dp"
+                    ios:password="false"
+                    ios:singleLine="true"
+                    ios:text="11:00"
+                    ios:textColor="@android:color/darker_gray" 
+                    ios:textSize="12sp"/>
+            </RelativeLayout>
+
+            <TextView
+                ios:layout_width="match_parent"
+                ios:layout_height="wrap_content"
+                ios:paddingBottom="10dp"
+                ios:paddingTop="5dp"
+                ios:text="My name is Zest3k."
+                ios:id="@+id/ericswords5"
+                ios:textColor="@android:color/darker_gray"
+                ios:textSize="12sp" />
+        </LinearLayout>
+    </RelativeLayout>
+    
+    
+    <LinearLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="1dp"
+        ios:background="#EEEEEE"
+        ios:orientation="horizontal" >
+    </LinearLayout>
+    
+    <RelativeLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="wrap_content"
+        ios:orientation="horizontal" 
+        ios:id="@+id/ericcard6">
+		<FrameLayout 
+		    ios:layout_width="wrap_content"
+        	ios:layout_height="wrap_content"
+        	ios:layout_centerVertical="true"
+        	ios:id="@+id/iconFrame6">
+		    <TextView
+	            ios:layout_width="40dp"
+	            ios:layout_height="40dp"
+	            ios:layout_gravity="center"
+	            ios:layout_margin="10dp"
+	            ios:background="#66ccff" />
+
+			<TextView
+			    ios:layout_width="wrap_content"
+			    ios:layout_height="wrap_content"
+			    ios:layout_gravity="top|right"
+			    ios:layout_margin="5dp"
+			    ios:background="@drawable/bshape"
+			    ios:text="111"
+			    ios:textAlignment="center"
+			    ios:textColor="#ffffff"
+			    ios:textSize="15sp"
+			    ios:visibility="visible" />
+
+		</FrameLayout>
+        
+        <LinearLayout
+            ios:layout_width="match_parent"
+            ios:layout_height="wrap_content"
+            ios:orientation="vertical" 
+            ios:layout_toRightOf="@id/iconFrame6">
+
+            <RelativeLayout
+                ios:layout_width="match_parent"
+                ios:layout_height="wrap_content" >
+
+                <TextView
+                    ios:layout_width="match_parent"
+                    ios:layout_height="wrap_content"
+                    ios:ellipsize="marquee"
+                    ios:gravity="left"
+                    ios:marqueeRepeatLimit="marquee_forever"
+                    ios:paddingBottom="5dp"
+                    ios:paddingTop="10dp"
+                    ios:password="false"
+                    ios:singleLine="true"
+                    ios:text="Eric Dong"
+                    ios:textColor="#000000" 
+                    ios:textSize="15sp"/>
+
+                <TextView
+                    ios:layout_width="match_parent"
+                    ios:layout_height="wrap_content"
+                    ios:ellipsize="marquee"
+                    ios:gravity="right"
+                    ios:marqueeRepeatLimit="marquee_forever"
+                    ios:paddingBottom="5dp"
+                    ios:paddingRight="10dp"
+                    ios:paddingTop="10dp"
+                    ios:password="false"
+                    ios:singleLine="true"
+                    ios:text="11:00"
+                    ios:textColor="@android:color/darker_gray" 
+                    ios:textSize="12sp"/>
+            </RelativeLayout>
+
+            <TextView
+                ios:layout_width="match_parent"
+                ios:layout_height="wrap_content"
+                ios:paddingBottom="10dp"
+                ios:paddingTop="5dp"
+                ios:text="My name is Zest3k."
+                ios:id="@+id/ericswords6"
+                ios:textColor="@android:color/darker_gray"
+                ios:textSize="12sp" />
+        </LinearLayout>
+    </RelativeLayout>    
+    
+    <LinearLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="1dp"
+        ios:background="#EEEEEE"
+        ios:orientation="horizontal" >
+    </LinearLayout>
+
+    
+	<RelativeLayout
+                ios:layout_width="match_parent"
+                ios:layout_height="wrap_content" 
+                ios:id="@+id/mod">
+    </RelativeLayout>
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

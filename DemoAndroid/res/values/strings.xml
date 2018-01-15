@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MyChat</string>
+    <string name="hello_world">Hello world2343546546456456456456456456-909=90-09-90-90-890697908657908657-9065879086590786590789065765765765754!</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_chat">ChatActivity</string>
+
+</resources>
