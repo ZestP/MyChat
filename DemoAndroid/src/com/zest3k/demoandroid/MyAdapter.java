@@ -56,20 +56,20 @@ public class MyAdapter extends BaseAdapter {
 	
 	private View newView(ViewGroup parent)
 	{
-		return LayoutInflater.from(context).inflate(resId,parent,false);
+		View convertView=LayoutInflater.from(context).inflate(resId,parent,false);
+		ViewHolder vh=new ViewHolder();
+		TextView tvw=(TextView) (convertView.findViewById(R.id.ericsword));
+		vh.tv_chatContent=tvw;
+		convertView.setTag(vh);
+		return convertView;
+
 	}
 	private void bindView(int position,View convertView)
 	{
-		TextView tvw=(TextView) (convertView.findViewById(R.id.ericsword));
-		ViewHolder vh=new ViewHolder();
-		vh.tv=tvw;
-		convertView.setTag(vh);
-		
-		tvw.setText(al.get(position).chatContent);
-		
+		((ViewHolder)convertView.getTag()).tv_chatContent.setText(al.get(position).chatContent);		
 	}
 	class ViewHolder
 	{
-		TextView tv;
+		TextView tv_chatContent;
 	}
 }

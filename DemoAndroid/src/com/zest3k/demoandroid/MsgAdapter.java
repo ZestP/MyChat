@@ -2,6 +2,8 @@ package com.zest3k.demoandroid;
 
 import java.util.ArrayList;
 
+import com.zest3k.demoandroid.MyAdapter.ViewHolder;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.util.TypedValue;
@@ -49,33 +51,54 @@ public class MsgAdapter extends BaseAdapter {
 		// TODO Auto-generated method stub
 		if(convertView==null)
 		{
-			convertView=LayoutInflater.from(context).inflate(resId,parent,false);
+			convertView=newView(parent);
 		}
-		float dp2px= context.getResources().getDisplayMetrics().density;
+		
+		bindView(position,convertView);
+		return convertView;
+		
+	}
+	private View newView(ViewGroup parent)
+	{
+		View convertView=LayoutInflater.from(context).inflate(resId,parent,false);
+		ViewHolder vh=new ViewHolder();
 		TextView head=(TextView) (convertView.findViewById(R.id.msg_part_headicon));
 		TextView msg=(TextView) (convertView.findViewById(R.id.msg_part_msg));
+		vh.tv_head=head;
+		vh.tv_msg=msg;
+		convertView.setTag(vh);
+		return convertView;
+
+	}
+	private void bindView(int position,View convertView)
+	{
+		float dp2px= context.getResources().getDisplayMetrics().density;
+		ViewHolder vh=(ViewHolder) convertView.getTag();
 		if(al.get(position).isMe)
 		{
 			RelativeLayout.LayoutParams lp=new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
 			lp.addRule(RelativeLayout.LEFT_OF,R.id.msg_part_headicon);
 			lp.setMargins((int)(10*dp2px), (int)(10*dp2px), (int)(0*dp2px), (int)(10*dp2px));
-			msg.setLayoutParams(lp);
+			vh.tv_msg.setLayoutParams(lp);
 			RelativeLayout.LayoutParams lp2=new RelativeLayout.LayoutParams((int)(40*dp2px),(int)(40*dp2px));
 			lp2.addRule(RelativeLayout.ALIGN_PARENT_END);
 			lp2.setMargins((int)(10*dp2px), (int)(10*dp2px), (int)(10*dp2px), (int)(10*dp2px));
-			head.setLayoutParams(lp2);
+			vh.tv_head.setLayoutParams(lp2);
 		}else {
 			RelativeLayout.LayoutParams lp=new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
 			lp.addRule(RelativeLayout.RIGHT_OF,R.id.msg_part_headicon);
 			lp.setMargins((int)(0*dp2px), (int)(10*dp2px), (int)(10*dp2px), (int)(10*dp2px));
-			msg.setLayoutParams(lp);
+			vh.tv_msg.setLayoutParams(lp);
 			RelativeLayout.LayoutParams lp2=new RelativeLayout.LayoutParams((int)(40*dp2px),(int)(40*dp2px));
 			lp2.addRule(RelativeLayout.ALIGN_PARENT_START);
 			lp2.setMargins((int)(10*dp2px), (int)(10*dp2px), (int)(10*dp2px), (int)(10*dp2px));
-			head.setLayoutParams(lp2);
+			vh.tv_head.setLayoutParams(lp2);
 		}
-		msg.setText(al.get(position).msg);
-		return convertView;
+		vh.tv_msg.setText(al.get(position).msg);
 	}
-
+	class ViewHolder
+	{
+		TextView tv_head;
+		TextView tv_msg;
+	}
 }
