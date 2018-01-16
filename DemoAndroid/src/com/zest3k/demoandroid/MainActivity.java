@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
@@ -21,8 +22,11 @@ import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -30,7 +34,8 @@ public class MainActivity extends Activity {
 	String dots;
 	TextView tv;
 	int cnt;
-	boolean isQuitting=false;
+	ArrayList<ChatCardData> al;
+	boolean isQuitting=false,needRefresh=false;
 	private Handler mHandler = new Handler() {
 
 		public void handleMessage(Message msg) {
@@ -61,17 +66,25 @@ public class MainActivity extends Activity {
 //		tmp.setLayoutParams(lp);
 		
 		//RelativeLayout eric=(RelativeLayout) findViewById(R.id.ericcard);
-		ListView ls=(ListView) findViewById(R.id.chat_list);
-		ArrayList<ChatCardData> al=new ArrayList<ChatCardData>();
-		for(int i=0;i<100;i++)
+		
+		Intent intent=getIntent();
+		needRefresh=intent.getBooleanExtra("needRefresh", false);
+		
+		if(needRefresh)
 		{
-			ChatCardData tmp=new ChatCardData();
-			tmp.chatContent="TestContent"+i;
-			al.add(tmp);
+			al=new ArrayList<ChatCardData>();
+			for(int i=0;i<100;i++)
+			{
+				ChatCardData tmp=new ChatCardData();
+				tmp.chatContent="TestContent"+i;
+				al.add(tmp);
+			}
+			Log.i("ZX", "Init");
 		}
 		//SimpleAdapter sa=new SimpleAdapter(null, null, cnt, null, null);
-		MyAdapter ba=new MyAdapter(this,al,R.layout.chat_part);
-		ls.setAdapter(ba);
+		
+		
+		
 		
 //		ls.addView(tmp);
 		/*eric.setOnClickListener(new OnClickListener() {
@@ -132,7 +145,15 @@ public class MainActivity extends Activity {
 		{
 			//TextView last=(TextView) findViewById(R.id.ericswords);
 			//last.setText(data.getStringExtra("lastWords"));
-			
+			ListView ls=(ListView) findViewById(R.id.chat_list);
+			MyAdapter ma=(MyAdapter) ls.getAdapter();
+			needRefresh=false;
+			int position=data.getIntExtra("no", -1);
+			if(position>=0)
+			{
+				al.get(position).chatContent=data.getStringExtra("lastWords");
+				Log.i("ZX", "Change"+position+" "+data.getStringExtra("lastWords"));
+			}
 		}
 	}
 
@@ -140,6 +161,33 @@ public class MainActivity extends Activity {
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
+		Collections.sort(al, new Comparator<ChatCardData>() {
+
+			@Override
+			public int compare(ChatCardData lhs, ChatCardData rhs) {
+				// TODO Auto-generated method stub
+				if(lhs.chatContent.compareTo(rhs.chatContent)<0)
+					return 1;
+				return -1;
+			}
+			
+		});
+		ListView ls=(ListView) findViewById(R.id.chat_list);
+		MyAdapter ba=new MyAdapter(this,al,R.layout.chat_part);
+		ls.setAdapter(ba);
+		ls.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				Intent myIntent=new Intent();
+				myIntent.setClass(MainActivity.this, ChatActivity.class);
+				myIntent.putExtra("no",position);
+				MainActivity.this.startActivityForResult(myIntent,1);
+			}
+			
+		});
+		Log.i("ZX", "setAdapter");
 		Log.i("ZX", "onStart");
 	}
 	@Override

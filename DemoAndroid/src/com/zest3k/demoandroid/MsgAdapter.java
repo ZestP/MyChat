@@ -49,7 +49,6 @@ public class MsgAdapter extends BaseAdapter {
 		// TODO Auto-generated method stub
 		if(convertView==null)
 		{
-			convertView=new View(context);
 			convertView=LayoutInflater.from(context).inflate(resId,parent,false);
 		}
 		float dp2px= context.getResources().getDisplayMetrics().density;

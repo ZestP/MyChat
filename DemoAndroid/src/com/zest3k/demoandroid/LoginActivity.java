@@ -101,6 +101,7 @@ public class LoginActivity extends Activity {
 							Intent myIntent=new Intent();
 							myIntent.setClass(LoginActivity.this, MainActivity.class);
 							myIntent.putExtra(usrname,passcode);
+							myIntent.putExtra("needRefresh", true);
 							//myIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 							LoginActivity.this.startActivity(myIntent);
 							

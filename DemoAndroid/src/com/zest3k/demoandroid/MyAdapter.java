@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -46,25 +47,29 @@ public class MyAdapter extends BaseAdapter {
 		// TODO Auto-generated method stub
 		if(convertView==null)
 		{
-			convertView=new View(context);
-			convertView=LayoutInflater.from(context).inflate(resId,parent,false);
+			convertView=newView(parent);
 		}
 		
-		TextView tvw=(TextView) (convertView.findViewById(R.id.ericsword));
-		tvw.setText(al.get(position).chatContent);
-		convertView.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent myIntent=new Intent();
-				myIntent.setClass(context, ChatActivity.class);
-				myIntent.putExtra("no","dfsdfsd");
-				context.startActivityForResult(myIntent,1);
-			}
-			
-		});
+		bindView(position,convertView);
 		return convertView;
 	}
-
+	
+	private View newView(ViewGroup parent)
+	{
+		return LayoutInflater.from(context).inflate(resId,parent,false);
+	}
+	private void bindView(int position,View convertView)
+	{
+		TextView tvw=(TextView) (convertView.findViewById(R.id.ericsword));
+		ViewHolder vh=new ViewHolder();
+		vh.tv=tvw;
+		convertView.setTag(vh);
+		
+		tvw.setText(al.get(position).chatContent);
+		
+	}
+	class ViewHolder
+	{
+		TextView tv;
+	}
 }

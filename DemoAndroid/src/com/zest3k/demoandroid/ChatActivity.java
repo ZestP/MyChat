@@ -20,6 +20,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,13 +30,16 @@ import android.widget.Toast;
 public class ChatActivity extends Activity {
 	EditText sendingText;
 	NotificationManager nm;
+	int position=-1;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_chat);
 		sendingText=(EditText) findViewById(R.id.sendingtext);
 
-
+		Intent intent=getIntent();
+		
+		position=intent.getIntExtra("no", -1);
 		ListView ls=(ListView) findViewById(R.id.msg_list);
 		ArrayList<MsgData> al=new ArrayList<MsgData>();
 		for(int i=0;i<100;i++)
@@ -46,7 +51,7 @@ public class ChatActivity extends Activity {
 		}
 		MsgAdapter ba=new MsgAdapter(this,al,R.layout.msg_part);
 		ls.setAdapter(ba);
-		
+
 		
 		
 		
@@ -60,6 +65,7 @@ public class ChatActivity extends Activity {
 				String lastWords=sendingText.getText().toString();
 				
 				myIntent.putExtra("lastWords",lastWords);
+				myIntent.putExtra("no",position);
 				ChatActivity.this.setResult(1, myIntent);
 				ChatActivity.this.finish();
 			}

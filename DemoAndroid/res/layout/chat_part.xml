@@ -81,6 +81,7 @@
                 ios:paddingBottom="10dp"
                 ios:paddingTop="5dp"
                 ios:text="My name is Zest3k."
+                ios:singleLine="true"
                 ios:tag="words"
                 ios:textColor="@android:color/darker_gray"
                 ios:textSize="12sp" />
