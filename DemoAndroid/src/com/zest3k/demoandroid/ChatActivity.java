@@ -1,5 +1,6 @@
 package com.zest3k.demoandroid;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -20,6 +21,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +35,21 @@ public class ChatActivity extends Activity {
 		sendingText=(EditText) findViewById(R.id.sendingtext);
 
 
+		ListView ls=(ListView) findViewById(R.id.msg_list);
+		ArrayList<MsgData> al=new ArrayList<MsgData>();
+		for(int i=0;i<100;i++)
+		{
+			MsgData tmp=new MsgData();
+			tmp.msg="TestContent"+i;
+			tmp.isMe=((i%2==0)?true:false);
+			al.add(tmp);
+		}
+		MsgAdapter ba=new MsgAdapter(this,al,R.layout.msg_part);
+		ls.setAdapter(ba);
+		
+		
+		
+		
 		TextView send=(TextView) findViewById(R.id.send);
 		send.setOnClickListener(new OnClickListener() {
 			

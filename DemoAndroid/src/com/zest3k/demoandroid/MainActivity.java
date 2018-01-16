@@ -14,12 +14,15 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -44,34 +47,34 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		Log.i("ZX", "onCreate");
 		setContentView(R.layout.activity_main);
-		//Log.i("AB",Boolean.toString(this==getApplicationContext()));
-		//tv = (TextView) findViewById(R.id.text1);
-		LinearLayout ll = (LinearLayout) findViewById(R.id.content);
-		TextView tmp = new TextView(this);
-//		tmp.setWidth(49);
-//		tmp.setHeight(49);
-		tmp.setText("You've already reached the end.");
-		tmp.setTextColor(Color.GRAY);
-		//tmp.setBackgroundColor(Color.DKGRAY);
-		tmp.setGravity(Gravity.CENTER);
-		RelativeLayout.LayoutParams lp=new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
-		lp.addRule(RelativeLayout.CENTER_IN_PARENT);
-		tmp.setLayoutParams(lp);
 		
-		Log.i("ZX", String.valueOf(ll.getChildCount()));
-		//tv.setSelected(true);
-		//TextView icon = (TextView) findViewById(R.id.icon);
-		//tv.setText("Zest3k is modifing the text.");
-		RelativeLayout eric=(RelativeLayout) findViewById(R.id.ericcard);
+//		ListView ls = (ListView) findViewById(R.id.chat_list);
+//		TextView tmp = new TextView(this);
+////		tmp.setWidth(49);
+////		tmp.setHeight(49);
+//		tmp.setText("You've already reached the end.");
+//		tmp.setTextColor(Color.GRAY);
+//		//tmp.setBackgroundColor(Color.DKGRAY);
+//		tmp.setGravity(Gravity.CENTER);
+//		RelativeLayout.LayoutParams lp=new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
+//		lp.addRule(RelativeLayout.CENTER_IN_PARENT);
+//		tmp.setLayoutParams(lp);
+		
+		//RelativeLayout eric=(RelativeLayout) findViewById(R.id.ericcard);
+		ListView ls=(ListView) findViewById(R.id.chat_list);
+		ArrayList<ChatCardData> al=new ArrayList<ChatCardData>();
 		for(int i=0;i<100;i++)
 		{
-			View v=LayoutInflater.from(this).inflate(R.layout.chat_part, ll,true);
-			TextView tvw=(TextView) (v.findViewById(R.id.ericsword));
-			if(v!=ll)Log.i("ZX","New");
-			tvw.setText("XFFDSF");
+			ChatCardData tmp=new ChatCardData();
+			tmp.chatContent="TestContent"+i;
+			al.add(tmp);
 		}
-		ll.addView(tmp);
-		eric.setOnClickListener(new OnClickListener() {
+		//SimpleAdapter sa=new SimpleAdapter(null, null, cnt, null, null);
+		MyAdapter ba=new MyAdapter(this,al,R.layout.chat_part);
+		ls.setAdapter(ba);
+		
+//		ls.addView(tmp);
+		/*eric.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -79,51 +82,10 @@ public class MainActivity extends Activity {
 				Intent myIntent=new Intent();
 				myIntent.setClass(MainActivity.this, ChatActivity.class);
 				myIntent.putExtra("zest3k","Abc");
-//				myIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 				MainActivity.this.startActivityForResult(myIntent,1);
 			}
 			
-		});
-		// tv.setWidth(10);
-		// icon.setOnClickListener(new OnClickListener()
-		// {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// // TODO Auto-generated method stub
-		// UpdateDots();
-		// }
-		//
-		// });
-//		icon.setOnTouchListener(new OnTouchListener() {
-//			@Override
-//			public boolean onTouch(View v, MotionEvent event) {
-//				// TODO Auto-generated method stub
-//				switch (event.getAction()) {
-//				case MotionEvent.ACTION_DOWN:
-//					UpdateDots();
-//					tv.setTextColor(Color.parseColor("#F5F5DC"));
-//					tv.setGravity(Gravity.CENTER);
-//					break;
-//				case MotionEvent.ACTION_UP:
-//					tv.setTextColor(Color.parseColor("#66CCFF"));
-//					break;
-//				}
-//				Log.i("ZX", "ABC");
-//				return true;
-//			}
-//
-//		});
-		cnt = 1;
-		// Timer timer = new Timer();
-		// timer.schedule(new TimerTask() {
-		// public void run() {
-		//
-		// Message message = new Message();
-		// message.what = 1;
-		// mHandler.sendMessage(message);
-		// }
-		// }, 2000 , 1000);
+		});*/
 	}
 
 	@Override
@@ -168,8 +130,8 @@ public class MainActivity extends Activity {
 		super.onActivityResult(requestCode, resultCode, data);
 		if(requestCode==1&&resultCode==1)
 		{
-			TextView last=(TextView) findViewById(R.id.ericswords);
-			last.setText(data.getStringExtra("lastWords"));
+			//TextView last=(TextView) findViewById(R.id.ericswords);
+			//last.setText(data.getStringExtra("lastWords"));
 			
 		}
 	}
