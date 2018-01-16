@@ -1,5 +1,6 @@
 package com.zest3k.demoandroid;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -18,7 +19,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,23 +35,15 @@ public class ChatActivity extends Activity {
 		setContentView(R.layout.activity_chat);
 		sendingText=(EditText) findViewById(R.id.sendingtext);
 
-
-		TextView send=(TextView) findViewById(R.id.send);
-		send.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent myIntent=new Intent();
-				String lastWords=sendingText.getText().toString();
-				
-				myIntent.putExtra("lastWords",lastWords);
-				ChatActivity.this.setResult(1, myIntent);
-				ChatActivity.this.finish();
-			}
-			
-		});
+		ArrayList<ChatCardData> al=new ArrayList<ChatCardData>();
+		for(int i=0;i<100;i++)
+		{
+			ChatCardData tmp=new ChatCardData();
+			tmp.chatContent="TestContent"+i;
+			al.add(tmp);
+		}
 		
+		MyAdapter ba=new MyAdapter(al);
 	}
 	@Override
 	protected void onStart() {

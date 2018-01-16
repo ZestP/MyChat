@@ -18,6 +18,7 @@ import android.view.View.OnTouchListener;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.Timer;
@@ -65,11 +66,14 @@ public class MainActivity extends Activity {
 		RelativeLayout eric=(RelativeLayout) findViewById(R.id.ericcard);
 		for(int i=0;i<100;i++)
 		{
-			View v=LayoutInflater.from(this).inflate(R.layout.chat_part, ll,true);
-			TextView tvw=(TextView) (v.findViewById(R.id.ericsword));
-			if(v!=ll)Log.i("ZX","New");
+			
+			LayoutInflater.from(this).inflate(R.layout.chat_part, ll,true);
+			View vv=ll.getChildAt(ll.getChildCount()-1);
+			TextView tvw=(TextView) (vv.findViewById(R.id.ericsword));
+			
 			tvw.setText("XFFDSF");
 		}
+		
 		ll.addView(tmp);
 		eric.setOnClickListener(new OnClickListener() {
 
@@ -235,4 +239,5 @@ public class MainActivity extends Activity {
 		}
 
 	}
+	
 }
