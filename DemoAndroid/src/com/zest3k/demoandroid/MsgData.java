@@ -1,8 +1,8 @@
 package com.zest3k.demoandroid;
 
-import java.util.Date;
+import java.io.Serializable;
 
-public class MsgData {
+public class MsgData implements Serializable {
 	public String msg;
 	public int headId;
 	public int usrId;
