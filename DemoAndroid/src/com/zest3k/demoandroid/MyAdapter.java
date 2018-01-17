@@ -1,6 +1,8 @@
 package com.zest3k.demoandroid;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -59,17 +61,41 @@ public class MyAdapter extends BaseAdapter {
 		View convertView=LayoutInflater.from(context).inflate(resId,parent,false);
 		ViewHolder vh=new ViewHolder();
 		TextView tvw=(TextView) (convertView.findViewById(R.id.ericsword));
+		TextView tvTime=(TextView) (convertView.findViewById(R.id.chat_card_time));
 		vh.tv_chatContent=tvw;
+		vh.tv_chatCardTime=tvTime;
 		convertView.setTag(vh);
 		return convertView;
 
 	}
 	private void bindView(int position,View convertView)
 	{
-		((ViewHolder)convertView.getTag()).tv_chatContent.setText(al.get(position).chatContent);		
+		((ViewHolder)convertView.getTag()).tv_chatContent.setText(al.get(position).chatContent);
+		SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+		Date date=new Date(al.get(position).time);
+		if(isToday(date))
+		{
+			sdf = new SimpleDateFormat("HH:mm"); 
+		}else {
+			sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+		}
+		String str = sdf.format(date);  
+		((ViewHolder)convertView.getTag()).tv_chatCardTime.setText(str);
 	}
 	class ViewHolder
 	{
 		TextView tv_chatContent;
+		TextView tv_chatCardTime;
+	}
+	private boolean isToday(Date d)
+	{
+		SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+		String dn=sdf.format(new Date());
+		String dc=sdf.format(d);
+		return dn.equals(dc);
+	}
+	public void UpdateData(ArrayList<ChatCardData> myal)
+	{
+		al=myal;
 	}
 }

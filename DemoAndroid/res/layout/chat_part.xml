@@ -59,6 +59,7 @@
                     ios:textSize="15sp"/>
 
                 <TextView
+                    ios:id="@+id/chat_card_time"
                     ios:layout_width="match_parent"
                     ios:layout_height="wrap_content"
                     ios:ellipsize="marquee"

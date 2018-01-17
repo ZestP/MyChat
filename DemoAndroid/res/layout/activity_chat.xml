@@ -62,6 +62,7 @@
             ios:layout_marginTop="10dp"
             ios:layout_toLeftOf="@id/send"
             ios:layout_toRightOf="@id/morefun"
+            ios:background="@drawable/shape_edittext"
             ios:hint="Texting here..."
             ios:textColor="#000000"
             ios:textSize="20sp" />
@@ -94,7 +95,10 @@
         ios:layout_height="match_parent" 
         ios:id="@+id/msg_list"
         ios:layout_below="@id/topbar"
-        ios:layout_above="@id/bottombar">
+        ios:layout_above="@id/bottombar"
+        ios:stackFromBottom="true"
+		ios:transcriptMode="alwaysScroll"
+		ios:divider="@null">
 
         
     </ListView>

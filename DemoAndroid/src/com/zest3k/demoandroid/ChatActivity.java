@@ -1,6 +1,7 @@
 package com.zest3k.demoandroid;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -30,44 +31,68 @@ import android.widget.Toast;
 public class ChatActivity extends Activity {
 	EditText sendingText;
 	NotificationManager nm;
+	ArrayList<MsgData> al;
+	MsgAdapter ba;
 	int position=-1;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_chat);
-		sendingText=(EditText) findViewById(R.id.sendingtext);
+		
 
 		Intent intent=getIntent();
-		
 		position=intent.getIntExtra("no", -1);
+		
+		
+		
 		ListView ls=(ListView) findViewById(R.id.msg_list);
-		ArrayList<MsgData> al=new ArrayList<MsgData>();
+		al=new ArrayList<MsgData>();
 		for(int i=0;i<100;i++)
 		{
 			MsgData tmp=new MsgData();
 			tmp.msg="TestContent"+i;
 			tmp.isMe=((i%2==0)?true:false);
+			tmp.time=new Date().getTime();
 			al.add(tmp);
 		}
-		MsgAdapter ba=new MsgAdapter(this,al,R.layout.msg_part);
+		ba=new MsgAdapter(this,al,R.layout.msg_part);
 		ls.setAdapter(ba);
 
 		
 		
-		
+		sendingText=(EditText) findViewById(R.id.sendingtext);
 		TextView send=(TextView) findViewById(R.id.send);
 		send.setOnClickListener(new OnClickListener() {
 			
+
 			@Override
 			public void onClick(View v) {
+				/* (non-Javadoc)
+				 * Jump
+				 */				
 				// TODO Auto-generated method stub
+				
+				MsgData tmp=new MsgData();
+				tmp.msg=sendingText.getText().toString();
+				tmp.isMe=true;
+				tmp.time=new Date().getTime();
+				al.add(tmp);
+				ba.notifyDataSetChanged();
+				
+				
+				
 				Intent myIntent=new Intent();
 				String lastWords=sendingText.getText().toString();
-				
+				myIntent.putExtra("time",tmp.time);
 				myIntent.putExtra("lastWords",lastWords);
 				myIntent.putExtra("no",position);
-				ChatActivity.this.setResult(1, myIntent);
+				myIntent.setAction("GOTO_MAIN_ACTIVITY");
+				ChatActivity.this.sendBroadcast(myIntent);
 				ChatActivity.this.finish();
+
+				
+				sendingText.setText("");
+				
 			}
 			
 		});

@@ -7,6 +7,6 @@ public class ChatCardData {
 	public int portraitId;
 	public String name;
 	public String chatContent;
-	public int time;
+	public long time;
 	public int messageCnt;
 }
