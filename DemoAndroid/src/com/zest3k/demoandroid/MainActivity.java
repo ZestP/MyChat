@@ -2,13 +2,17 @@ package com.zest3k.demoandroid;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.app.Service;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
@@ -41,6 +45,30 @@ public class MainActivity extends Activity {
 	int cnt;
 	ArrayList<ChatCardData> al;
 
+	
+	private MsgSvc mService;
+	private MsgSvc.MyBinder mBinder;
+	private boolean mIsBind = false;
+	private ServiceConnection conn=new ServiceConnection()
+	{
+
+		@Override
+		public void onServiceConnected(ComponentName name, IBinder service) {
+			// TODO Auto-generated method stub
+			Log.i("ZX", "ONSERVICECONN");
+			mBinder = (MsgSvc.MyBinder) service;
+			mService = mBinder.getService();
+			mIsBind = true;
+		}
+
+		@Override
+		public void onServiceDisconnected(ComponentName name) {
+			// TODO Auto-generated method stub
+			Log.i("ZX", "ONSERVICEDISCONN");
+			mIsBind = false;
+		}
+
+	};
 	private BroadcastReceiver br = new BroadcastReceiver() {
 
 		@Override
@@ -85,9 +113,17 @@ public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		Intent bindintent=new Intent(this,MsgSvc.class);
+		bindService(bindintent,conn,Context.BIND_AUTO_CREATE);
+		
 		super.onCreate(savedInstanceState);
 		Log.i("ZX", "onCreate");
 		setContentView(R.layout.activity_main);
+		
+		
+		
+		
+		
 		RegisterReceiver();
 		// ListView ls = (ListView) findViewById(R.id.chat_list);
 		// TextView tmp = new TextView(this);
@@ -210,6 +246,8 @@ public class MainActivity extends Activity {
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
+		
+
 		Collections.sort(al, new Comparator<ChatCardData>() {
 
 			@Override
@@ -247,6 +285,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
+		
 		super.onPause();
 		Log.i("ZX", "onPause");
 	}
@@ -254,9 +293,10 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onStop() {
 		// TODO Auto-generated method stub
+		MainActivity.this.unbindService(conn);
 		super.onStop();
 		Log.i("ZX", "onStop");
-		
+
 	}
 
 	@Override
