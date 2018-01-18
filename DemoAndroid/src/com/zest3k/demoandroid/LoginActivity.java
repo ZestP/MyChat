@@ -1,5 +1,11 @@
 package com.zest3k.demoandroid;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -11,7 +17,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -118,7 +126,9 @@ public class LoginActivity extends Activity {
 			
 		});
 	}
-	boolean Validate(String usrname,String psw)
+	
+	//本地版验证
+	/*boolean Validate(String usrname,String psw)
 	{
 		SharedPreferences sp=getSharedPreferences("login",Context.MODE_APPEND);
 		String exist=sp.getString(usrname, "");
@@ -138,6 +148,75 @@ public class LoginActivity extends Activity {
 			return true;
 		}
 		return false;
-	}
+	}*/
+	
+	//网络版验证
+	boolean Validate(String usrname,String psw)
+	{
+		String exist=UploadData(usrname);
+		AsyncTask at=new AsyncTask<String,Integer,String>()
+				{
 
+					@Override
+					protected String doInBackground(String... params) {
+						// TODO Auto-generated method stub
+						UploadData(params[0]);
+						return null;
+					}};
+		if(!exist.equals(""))
+		{
+			if(!exist.equals(psw))
+			{
+				Toast.makeText(getApplicationContext(),"Password mismatch.",
+					     Toast.LENGTH_LONG).show();
+			}else{
+				return true;
+			}
+		}else{
+//			Editor ed=sp.edit();
+//			ed.putString(usrname, psw);
+//			ed.commit();
+			return true;
+		}
+		return false;
+	}
+	String UploadData(String message)
+	{
+		Socket socket = null;
+		String result="";
+		try   
+        {     
+			
+            //创建Socket  
+          socket = new Socket("10.25.52.6",8087);     
+            //向服务器发送消息  
+            PrintWriter out = new PrintWriter( new BufferedWriter( new OutputStreamWriter(socket.getOutputStream())),true);        
+            out.println(message);   
+              
+            //接收来自服务器的消息  
+            BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));   
+            String msg = br.readLine();   
+              
+            if ( msg != null )  
+            {  
+                result=msg;  
+            }  
+            else  
+            {  
+                result="";  
+            }
+            //关闭流  
+            out.close();  
+            br.close();  
+            //关闭Socket  
+            socket.close();   
+            
+        }  
+        catch (Exception e)   
+        {  
+            // TODO: handle exception  
+            e.printStackTrace();  
+        }
+		return result;
+	}
 }
