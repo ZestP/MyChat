@@ -20,13 +20,16 @@
             ios:textColor="#ffffff"
             ios:textSize="20sp" />
     </RelativeLayout>
-
-    <ListView
-        ios:layout_width="match_parent"
-        ios:layout_height="match_parent" 
-        ios:id="@+id/chat_list">"
-
-        
-    </ListView>
+	<android.support.v4.view.ViewPager
+	    	   ios:id="@+id/viewpager" 
+	    	   ios:layout_width="match_parent"
+	    	   ios:layout_height="match_parent"
+	    	   />
+<!--     <ListView -->
+<!--     ios:layout_width="match_parent" -->
+<!--     ios:layout_height="match_parent"  -->
+<!--     ios:id="@+id/chat_list" -->
+<!--     ios:visibility="gone"> -->
+<!-- </ListView> -->
 
 </LinearLayout>

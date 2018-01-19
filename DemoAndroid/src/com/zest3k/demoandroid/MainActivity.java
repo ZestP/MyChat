@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -44,13 +46,14 @@ public class MainActivity extends Activity {
 	ListView ls;
 	int cnt;
 	ArrayList<ChatCardData> al;
-
-	
+	private View view1, view2, view3;
+	private ViewPager viewPager;// 对应的viewPager  
+	private ArrayList<View> viewList;// view数组  
+	private MainPagerAdapter pagerAdapter;
 	private MsgSvc mService;
 	private MsgSvc.MyBinder mBinder;
 	private boolean mIsBind = false;
-	private ServiceConnection conn=new ServiceConnection()
-	{
+	private ServiceConnection conn = new ServiceConnection() {
 
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
@@ -83,7 +86,7 @@ public class MainActivity extends Activity {
 				al.get(position).time = intent.getLongExtra("time", 0);
 				Log.i("ZX", "Change" + position + " " + intent.getStringExtra("lastWords"));
 			}
-			//ma.UpdateData(al);
+			// ma.UpdateData(al);
 			ma.notifyDataSetChanged();
 		}
 
@@ -113,17 +116,21 @@ public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Intent bindintent=new Intent(this,MsgSvc.class);
-		bindService(bindintent,conn,Context.BIND_AUTO_CREATE);
-		
+
+
 		super.onCreate(savedInstanceState);
 		Log.i("ZX", "onCreate");
 		setContentView(R.layout.activity_main);
-		
-		
-		
-		
-		
+
+		viewPager = (ViewPager) findViewById(R.id.viewpager);
+		LayoutInflater inflater = getLayoutInflater();
+		view1 = inflater.inflate(R.layout.chatlistlayout, null);
+		view2 = inflater.inflate(R.layout.friendlistlayout, null);
+		viewList = new ArrayList<View>();
+		viewList.add(view1);
+		viewList.add(view2);
+		pagerAdapter = new MainPagerAdapter(viewList);
+		viewPager.setAdapter(pagerAdapter);
 		RegisterReceiver();
 		// ListView ls = (ListView) findViewById(R.id.chat_list);
 		// TextView tmp = new TextView(this);
@@ -153,9 +160,9 @@ public class MainActivity extends Activity {
 			}
 			Log.i("ZX", "Init");
 		}
-		// SimpleAdapter sa=new SimpleAdapter(null, null, cnt, null, null);
 
-		ls = (ListView) findViewById(R.id.chat_list);
+		ls = (ListView) view1.findViewById(R.id.chat_list);
+		//ls = (ListView) view1;
 		MyAdapter ba = new MyAdapter(this, al, R.layout.chat_part);
 		ls.setAdapter(ba);
 		ls.setOnItemClickListener(new OnItemClickListener() {
@@ -165,12 +172,12 @@ public class MainActivity extends Activity {
 				// TODO Auto-generated method stub
 				view.getTag();
 				Intent myIntent = new Intent();
-				
+
 				myIntent.putExtra("no", position);
 				myIntent.setAction("GOTO_CHAT_ACTIVITY");
-				//MainActivity.this.startActivityForResult(myIntent, 1);
+				// MainActivity.this.startActivityForResult(myIntent, 1);
 				myIntent.setClass(MainActivity.this, ChatActivity.class);
-		
+
 				MainActivity.this.startActivity(myIntent);
 			}
 
@@ -225,31 +232,30 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
-//		Log.i("ACT", "GETRES");
+		// Log.i("ACT", "GETRES");
 		super.onActivityResult(requestCode, resultCode, data);
-//		if (requestCode == 1 && resultCode == 1) {
-//			// TextView last=(TextView) findViewById(R.id.ericswords);
-//			// last.setText(data.getStringExtra("lastWords"));
-//			ListView ls = (ListView) findViewById(R.id.chat_list);
-//			MyAdapter ma = (MyAdapter) ls.getAdapter();
-//			int position = data.getIntExtra("no", -1);
-//			if (position >= 0) {
-//				al.get(position).chatContent = data.getStringExtra("lastWords");
-//				al.get(position).time = data.getLongExtra("time", 0);
-//				Log.i("ZX", "Change" + position + " " + data.getStringExtra("lastWords"));
-//			}
-//			ma.notifyDataSetChanged();
-//		}
+		// if (requestCode == 1 && resultCode == 1) {
+		// // TextView last=(TextView) findViewById(R.id.ericswords);
+		// // last.setText(data.getStringExtra("lastWords"));
+		// ListView ls = (ListView) findViewById(R.id.chat_list);
+		// MyAdapter ma = (MyAdapter) ls.getAdapter();
+		// int position = data.getIntExtra("no", -1);
+		// if (position >= 0) {
+		// al.get(position).chatContent = data.getStringExtra("lastWords");
+		// al.get(position).time = data.getLongExtra("time", 0);
+		// Log.i("ZX", "Change" + position + " " + data.getStringExtra("lastWords"));
+		// }
+		// ma.notifyDataSetChanged();
+		// }
 	}
 
 	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		
-
+		Intent bindintent = new Intent(this, MsgSvc.class);
+		bindService(bindintent, conn, Context.BIND_AUTO_CREATE);
 		Collections.sort(al, new Comparator<ChatCardData>() {
-
 			@Override
 			public int compare(ChatCardData lhs, ChatCardData rhs) {
 				// TODO Auto-generated method stub
@@ -259,8 +265,6 @@ public class MainActivity extends Activity {
 			}
 
 		});
-		MyAdapter ma = (MyAdapter) ls.getAdapter();
-
 		Log.i("ZX", "onStart");
 	}
 
@@ -285,7 +289,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
-		
+
 		super.onPause();
 		Log.i("ZX", "onPause");
 	}
