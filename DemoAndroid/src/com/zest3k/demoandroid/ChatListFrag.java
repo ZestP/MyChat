@@ -38,6 +38,10 @@ public class ChatListFrag extends Fragment {
 	
 	private void InitChatList()
 	{
+		if(al==null)
+		{
+			al = new ArrayList<ChatCardData>();
+		}
 		ls = (ListView) root.findViewById(R.id.chat_list);
 		MyAdapter ba = new MyAdapter((Activity) context, al, R.layout.chat_part);
 		ls.setAdapter(ba);
@@ -77,8 +81,18 @@ public class ChatListFrag extends Fragment {
 		super.onStart();
 	}
 
-
 	private void UpdateData()
+	{
+		SortData();
+	}
+	public void UpdateData(int position,String chatContent,long time)
+	{
+		al.get(position).chatContent = chatContent;
+		al.get(position).time = time;
+		SortData();
+	}
+	
+	private void SortData()
 	{
 		Collections.sort(al, new Comparator<ChatCardData>() {
 			@Override

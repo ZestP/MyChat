@@ -33,7 +33,6 @@ public final class R {
         public static final int chattitle=0x7f070001;
         public static final int ericcard=0x7f070013;
         public static final int ericsword=0x7f070016;
-        public static final int friend_list=0x7f070018;
         public static final int iconFrame=0x7f070014;
         public static final int login_root=0x7f07000b;
         public static final int loginbtn=0x7f07000f;
@@ -41,8 +40,8 @@ public final class R {
         public static final int morefun=0x7f070003;
         public static final int morefun2=0x7f070007;
         public static final int msg_list=0x7f07000a;
-        public static final int msg_part_headicon=0x7f070019;
-        public static final int msg_part_msg=0x7f07001a;
+        public static final int msg_part_headicon=0x7f070018;
+        public static final int msg_part_msg=0x7f070019;
         public static final int passcode=0x7f07000e;
         public static final int rootLayout=0x7f070010;
         public static final int send=0x7f070004;

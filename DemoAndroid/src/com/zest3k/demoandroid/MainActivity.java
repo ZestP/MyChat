@@ -2,6 +2,9 @@ package com.zest3k.demoandroid;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -14,6 +17,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Gravity;
@@ -40,7 +44,18 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
+	
+	ChatListFrag mChatListFrag;
+	private void SetFragment(int content,Fragment frag)
+	{
+		FragmentManager fm=getFragmentManager();
+		FragmentTransaction transaction = fm.beginTransaction();
+		transaction.replace(content, frag);
+		transaction.commit();
+	}
+	private List<Fragment> mFragments;
+	
 	String dots;
 	TextView tv;
 	ListView ls;
@@ -82,8 +97,9 @@ public class MainActivity extends Activity {
 			MyAdapter ma = (MyAdapter) ls.getAdapter();
 			int position = intent.getIntExtra("no", -1);
 			if (position >= 0) {
-				al.get(position).chatContent = intent.getStringExtra("lastWords");
-				al.get(position).time = intent.getLongExtra("time", 0);
+//				al.get(position).chatContent = intent.getStringExtra("lastWords");
+//				al.get(position).time = intent.getLongExtra("time", 0);
+				mChatListFrag.UpdateData(position, intent.getStringExtra("lastWords"), intent.getLongExtra("time", 0));
 				Log.i("ZX", "Change" + position + " " + intent.getStringExtra("lastWords"));
 			}
 			// ma.UpdateData(al);
@@ -123,14 +139,27 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		viewPager = (ViewPager) findViewById(R.id.viewpager);
-		LayoutInflater inflater = getLayoutInflater();
+		List<android.support.v4.app.Fragment> fragments=new ArrayList<android.support.v4.app.Fragment>();
+		mChatListFrag=new ChatListFrag();
+		Intent intent = getIntent();
+		needRefresh = intent.getBooleanExtra("needRefresh", false);
+		if(needRefresh)
+		{
+			mChatListFrag.InitChatCardData();
+		}
+		fragments.add(mChatListFrag);
+		MainFragsAdapter adapter=new MainFragsAdapter(getSupportFragmentManager(),fragments);
+		viewPager.setAdapter(adapter);
+		
+		
+		/*LayoutInflater inflater = getLayoutInflater();
 		view1 = inflater.inflate(R.layout.chatlistlayout, null);
 		view2 = inflater.inflate(R.layout.friendlistlayout, null);
 		viewList = new ArrayList<View>();
 		viewList.add(view1);
 		viewList.add(view2);
 		pagerAdapter = new MainPagerAdapter(viewList);
-		viewPager.setAdapter(pagerAdapter);
+		viewPager.setAdapter(pagerAdapter);*/
 		RegisterReceiver();
 		// ListView ls = (ListView) findViewById(R.id.chat_list);
 		// TextView tmp = new TextView(this);
@@ -147,10 +176,10 @@ public class MainActivity extends Activity {
 
 		// RelativeLayout eric=(RelativeLayout) findViewById(R.id.ericcard);
 
-		Intent intent = getIntent();
-		needRefresh = intent.getBooleanExtra("needRefresh", false);
+		/*Intent intent = getIntent();
+		needRefresh = intent.getBooleanExtra("needRefresh", false);*/
 
-		if (needRefresh) {
+/*		if (needRefresh) {
 			al = new ArrayList<ChatCardData>();
 			for (int i = 0; i < 100; i++) {
 				ChatCardData tmp = new ChatCardData();
@@ -182,7 +211,7 @@ public class MainActivity extends Activity {
 			}
 
 		});
-		Log.i("ZX", "setAdapter");
+		Log.i("ZX", "setAdapter");*/
 
 		// ls.addView(tmp);
 		/*
@@ -195,12 +224,6 @@ public class MainActivity extends Activity {
 		 * 
 		 * });
 		 */
-	}
-
-	@Override
-	public boolean dispatchTouchEvent(MotionEvent ev) {
-		// TODO Auto-generated method stub
-		return super.dispatchTouchEvent(ev);
 	}
 
 	@Override
@@ -255,16 +278,6 @@ public class MainActivity extends Activity {
 		super.onStart();
 		Intent bindintent = new Intent(this, MsgSvc.class);
 		bindService(bindintent, conn, Context.BIND_AUTO_CREATE);
-		Collections.sort(al, new Comparator<ChatCardData>() {
-			@Override
-			public int compare(ChatCardData lhs, ChatCardData rhs) {
-				// TODO Auto-generated method stub
-				if (lhs.time < rhs.time)
-					return 1;
-				return -1;
-			}
-
-		});
 		Log.i("ZX", "onStart");
 	}
 

@@ -31,5 +31,4 @@
 <!--     ios:id="@+id/chat_list" -->
 <!--     ios:visibility="gone"> -->
 <!-- </ListView> -->
-
 </LinearLayout>
