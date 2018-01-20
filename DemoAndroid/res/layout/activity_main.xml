@@ -1,14 +1,16 @@
-<LinearLayout xmlns:ios="http://schemas.android.com/apk/res/android"
-    ios:id="@+id/rootLayout"
+<RelativeLayout xmlns:ios="http://schemas.android.com/apk/res/android"
+    ios:id="@+id/main_rootlayout"
     ios:layout_width="match_parent"
     ios:layout_height="match_parent"
     ios:background="#ffffff"
-    ios:orientation="vertical" >
+    >
 
     <RelativeLayout
         ios:layout_width="match_parent"
         ios:layout_height="wrap_content"
-        ios:background="#000000" >
+        ios:background="#000000" 
+        ios:id="@+id/main_topbar"
+        ios:layout_alignParentTop="true">
 
         <TextView
             ios:id="@+id/title"
@@ -20,15 +22,69 @@
             ios:textColor="#ffffff"
             ios:textSize="20sp" />
     </RelativeLayout>
-	<android.support.v4.view.ViewPager
-	    	   ios:id="@+id/viewpager" 
-	    	   ios:layout_width="match_parent"
-	    	   ios:layout_height="match_parent"
-	    	   />
+    
+    <LinearLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="wrap_content"
+        ios:background="#000000" 
+        ios:id="@+id/main_bottombar"
+        ios:layout_alignParentBottom="true"
+        >
+
+        <TextView
+            ios:id="@+id/main_bottombar_chatbtn"
+            ios:layout_width="0dp"
+            ios:layout_weight="1"
+            ios:layout_height="match_parent"
+            ios:layout_gravity="center"
+            ios:layout_margin="10dp"
+            ios:gravity="center"
+            ios:text="Recent"
+            ios:textColor="#ffffff"
+            ios:textSize="20sp" />
+        <TextView
+            ios:id="@+id/main_bottombar_friendbtn"
+            ios:layout_width="0dp"
+            ios:layout_weight="1"
+            ios:layout_height="match_parent"
+            ios:layout_gravity="center"
+            ios:gravity="center"
+            ios:layout_margin="10dp"
+            ios:text="Friends"
+            ios:textColor="#ffffff"
+            ios:textSize="20sp" />
+        <TextView
+            ios:id="@+id/main_bottombar_mybtn"
+            ios:layout_width="0dp"
+            ios:layout_weight="1"
+            ios:layout_height="match_parent"
+            ios:layout_gravity="center"
+            ios:gravity="center"
+            ios:layout_margin="10dp"
+            ios:text="Me"
+            ios:textColor="#ffffff"
+            ios:textSize="20sp" />
+    </LinearLayout>
+    
+    
+<!-- 	<android.support.v4.view.ViewPager -->
+<!-- 	    	   ios:id="@+id/viewpager"  -->
+<!-- 	    	   ios:layout_width="match_parent" -->
+<!-- 	    	   ios:layout_height="match_parent" -->
+<!-- 	    	   /> -->
+	<RelativeLayout
+        ios:layout_width="match_parent"
+        ios:layout_height="match_parent"
+        ios:id="@+id/rep_frag"
+        ios:layout_below="@id/main_topbar"
+        ios:layout_above="@id/main_bottombar">
+	</RelativeLayout>
+
+
 <!--     <ListView -->
 <!--     ios:layout_width="match_parent" -->
 <!--     ios:layout_height="match_parent"  -->
 <!--     ios:id="@+id/chat_list" -->
 <!--     ios:visibility="gone"> -->
 <!-- </ListView> -->
-</LinearLayout>
+</RelativeLayout>

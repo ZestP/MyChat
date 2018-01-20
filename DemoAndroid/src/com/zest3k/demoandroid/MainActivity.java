@@ -2,9 +2,9 @@ package com.zest3k.demoandroid;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -45,17 +45,19 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends FragmentActivity {
-	
+
 	ChatListFrag mChatListFrag;
-	private void SetFragment(int content,Fragment frag)
-	{
-		FragmentManager fm=getFragmentManager();
+	FriendListFrag mFriendListFrag;
+
+	private void SetFragment(int content, Fragment frag) {
+		FragmentManager fm = getSupportFragmentManager();
 		FragmentTransaction transaction = fm.beginTransaction();
 		transaction.replace(content, frag);
 		transaction.commit();
 	}
+
 	private List<Fragment> mFragments;
-	
+
 	String dots;
 	TextView tv;
 	ListView ls;
@@ -93,17 +95,17 @@ public class MainActivity extends FragmentActivity {
 		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
 			Log.i("ZX", "OnBroadcastReceive");
-			ListView ls = (ListView) findViewById(R.id.chat_list);
-			MyAdapter ma = (MyAdapter) ls.getAdapter();
+			// ListView ls = (ListView) findViewById(R.id.chat_list);
+			// MyAdapter ma = (MyAdapter) ls.getAdapter();
 			int position = intent.getIntExtra("no", -1);
 			if (position >= 0) {
-//				al.get(position).chatContent = intent.getStringExtra("lastWords");
-//				al.get(position).time = intent.getLongExtra("time", 0);
+				// al.get(position).chatContent = intent.getStringExtra("lastWords");
+				// al.get(position).time = intent.getLongExtra("time", 0);
 				mChatListFrag.UpdateData(position, intent.getStringExtra("lastWords"), intent.getLongExtra("time", 0));
 				Log.i("ZX", "Change" + position + " " + intent.getStringExtra("lastWords"));
 			}
 			// ma.UpdateData(al);
-			ma.notifyDataSetChanged();
+			// ma.notifyDataSetChanged();
 		}
 
 	};
@@ -129,37 +131,66 @@ public class MainActivity extends FragmentActivity {
 			}
 		};
 	};
+	private View mChatListBtn;
+	private View mFriendListBtn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-
 
 		super.onCreate(savedInstanceState);
 		Log.i("ZX", "onCreate");
 		setContentView(R.layout.activity_main);
 
-		viewPager = (ViewPager) findViewById(R.id.viewpager);
-		List<android.support.v4.app.Fragment> fragments=new ArrayList<android.support.v4.app.Fragment>();
-		mChatListFrag=new ChatListFrag();
+		
+//		 viewPager = (ViewPager) findViewById(R.id.viewpager);
+//		 List<android.support.v4.app.Fragment> fragments=new
+//		 ArrayList<android.support.v4.app.Fragment>(); mChatListFrag=new
+//		 ChatListFrag(); Intent intent = getIntent(); needRefresh =
+//		 intent.getBooleanExtra("needRefresh", false); if(needRefresh) {
+//		 mChatListFrag.InitChatCardData(); } fragments.add(mChatListFrag);
+//		 MainFragsAdapter adapter=new
+//		 MainFragsAdapter(getSupportFragmentManager(),fragments);
+//		 viewPager.setAdapter(adapter);
+		mFriendListFrag=new FriendListFrag();
+		
+		
+		
+		
+		mChatListFrag = new ChatListFrag();
 		Intent intent = getIntent();
 		needRefresh = intent.getBooleanExtra("needRefresh", false);
-		if(needRefresh)
-		{
+		if (needRefresh) {
 			mChatListFrag.InitChatCardData();
 		}
-		fragments.add(mChatListFrag);
-		MainFragsAdapter adapter=new MainFragsAdapter(getSupportFragmentManager(),fragments);
-		viewPager.setAdapter(adapter);
+		SetFragment(R.id.rep_frag, mChatListFrag);
 		
-		
-		/*LayoutInflater inflater = getLayoutInflater();
-		view1 = inflater.inflate(R.layout.chatlistlayout, null);
-		view2 = inflater.inflate(R.layout.friendlistlayout, null);
-		viewList = new ArrayList<View>();
-		viewList.add(view1);
-		viewList.add(view2);
-		pagerAdapter = new MainPagerAdapter(viewList);
-		viewPager.setAdapter(pagerAdapter);*/
+		mChatListBtn=findViewById(R.id.main_bottombar_chatbtn);
+		mFriendListBtn=findViewById(R.id.main_bottombar_friendbtn);
+		mChatListBtn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				SetFragment(R.id.rep_frag, mChatListFrag);
+			}
+			
+		});
+		mFriendListBtn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				SetFragment(R.id.rep_frag, mFriendListFrag);
+			}
+			
+		});
+		/*
+		 * LayoutInflater inflater = getLayoutInflater(); view1 =
+		 * inflater.inflate(R.layout.chatlistlayout, null); view2 =
+		 * inflater.inflate(R.layout.friendlistlayout, null); viewList = new
+		 * ArrayList<View>(); viewList.add(view1); viewList.add(view2); pagerAdapter =
+		 * new MainPagerAdapter(viewList); viewPager.setAdapter(pagerAdapter);
+		 */
 		RegisterReceiver();
 		// ListView ls = (ListView) findViewById(R.id.chat_list);
 		// TextView tmp = new TextView(this);
@@ -176,42 +207,33 @@ public class MainActivity extends FragmentActivity {
 
 		// RelativeLayout eric=(RelativeLayout) findViewById(R.id.ericcard);
 
-		/*Intent intent = getIntent();
-		needRefresh = intent.getBooleanExtra("needRefresh", false);*/
+		/*
+		 * Intent intent = getIntent(); needRefresh =
+		 * intent.getBooleanExtra("needRefresh", false);
+		 */
 
-/*		if (needRefresh) {
-			al = new ArrayList<ChatCardData>();
-			for (int i = 0; i < 100; i++) {
-				ChatCardData tmp = new ChatCardData();
-				tmp.chatContent = "TestContent" + i;
-				tmp.time = new Date().getTime();
-				al.add(tmp);
-			}
-			Log.i("ZX", "Init");
-		}
-
-		ls = (ListView) view1.findViewById(R.id.chat_list);
-		//ls = (ListView) view1;
-		MyAdapter ba = new MyAdapter(this, al, R.layout.chat_part);
-		ls.setAdapter(ba);
-		ls.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				// TODO Auto-generated method stub
-				view.getTag();
-				Intent myIntent = new Intent();
-
-				myIntent.putExtra("no", position);
-				myIntent.setAction("GOTO_CHAT_ACTIVITY");
-				// MainActivity.this.startActivityForResult(myIntent, 1);
-				myIntent.setClass(MainActivity.this, ChatActivity.class);
-
-				MainActivity.this.startActivity(myIntent);
-			}
-
-		});
-		Log.i("ZX", "setAdapter");*/
+		/*
+		 * if (needRefresh) { al = new ArrayList<ChatCardData>(); for (int i = 0; i <
+		 * 100; i++) { ChatCardData tmp = new ChatCardData(); tmp.chatContent =
+		 * "TestContent" + i; tmp.time = new Date().getTime(); al.add(tmp); }
+		 * Log.i("ZX", "Init"); }
+		 * 
+		 * ls = (ListView) view1.findViewById(R.id.chat_list); //ls = (ListView) view1;
+		 * MyAdapter ba = new MyAdapter(this, al, R.layout.chat_part);
+		 * ls.setAdapter(ba); ls.setOnItemClickListener(new OnItemClickListener() {
+		 * 
+		 * @Override public void onItemClick(AdapterView<?> parent, View view, int
+		 * position, long id) { // TODO Auto-generated method stub view.getTag(); Intent
+		 * myIntent = new Intent();
+		 * 
+		 * myIntent.putExtra("no", position); myIntent.setAction("GOTO_CHAT_ACTIVITY");
+		 * // MainActivity.this.startActivityForResult(myIntent, 1);
+		 * myIntent.setClass(MainActivity.this, ChatActivity.class);
+		 * 
+		 * MainActivity.this.startActivity(myIntent); }
+		 * 
+		 * }); Log.i("ZX", "setAdapter");
+		 */
 
 		// ls.addView(tmp);
 		/*
@@ -292,7 +314,7 @@ public class MainActivity extends FragmentActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		View r = findViewById(R.id.rootLayout);
+		View r = findViewById(R.id.main_rootlayout);
 		ObjectAnimator animator1 = ObjectAnimator.ofFloat(r, "alpha", 0f, 1f);
 		animator1.setDuration(1500);
 		animator1.start();

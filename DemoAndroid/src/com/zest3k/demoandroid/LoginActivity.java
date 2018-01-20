@@ -135,9 +135,9 @@ public class LoginActivity extends Activity {
 					ObjectAnimator animator1 = ObjectAnimator.ofFloat(r, "alpha", 1f, 0f);
 					final ObjectAnimator animator2 = ObjectAnimator.ofFloat(r, "scaleX", 1f, 10f);
 					final ObjectAnimator animator3 = ObjectAnimator.ofFloat(r, "scaleY", 1f, 10f);
-					animator3.setDuration(5000);
-					animator2.setDuration(5000);
-					animator1.setDuration(5000);
+					animator3.setDuration(500);
+					animator2.setDuration(500);
+					animator1.setDuration(500);
 					// 设置属性动画的监听事件（使用AnimatorListenerAdapter可以选择不监听所有事件）
 					animator1.addListener(new AnimatorListenerAdapter() {
 						@Override
